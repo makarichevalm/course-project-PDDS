@@ -4,7 +4,8 @@
 #include "Set.h"
 #include "Deque.h"
 #include<chrono>
-//using namespace Set6;
+#include <regex>
+
 void timeStructList(__int64* timet, int N) {
 
     Elem* setA = createSet(N, 0, N * 10);
@@ -287,71 +288,76 @@ void timeDeque(__int64* timet, int N) {
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    int N;
-    cout << "Введите количество элементов: \n";
-    cin >> N;
-    if (!cin.good())
-        cout << "Не";
-    else if (N <= 0)
-        cout <<"положительное числ";
-    else {
-        cout << endl;
-        __int64 t1[10];
-        timeStructList(t1, N);
-        __int64 t2[10];
-        timeclassSet(t2, N);
-        __int64 t3[10];
-        timeList(t3, N);
-        __int64 t4[10];
-        timeSet(t4, N);
-        __int64 t5[10];
-        timeDeque(t5, N);
+    string str;
+    regex rgx("^[0-9]+$");
+    bool fl = false;
+    do
+    {
+        if (fl)
+            cout << "Неверный ввод! Необходимо ввести целое число.\n";
+        cout << "Введите количество элементов: ";
+        cin >> str;
+        fl = true;
+    } while (!regex_match(str, rgx));
 
-        string title[10] = { "Создание множества    ","Мощность множества    ","Подмножество АА       ","Подмножество АВ       ",
-            "Равенство А=А         ","Равенство А=В         ","Объединение           ","Пересечение           ",
-            "Разность              ", "Симметричная разность " };
+    int N = stoi(str);
+    cout << N << endl;
+    cout << endl;
+	__int64 t1[10];
+	timeStructList(t1, N);
+	__int64 t2[10];
+	timeclassSet(t2, N);
+	__int64 t3[10];
+	timeList(t3, N);
+	__int64 t4[10];
+	timeSet(t4, N);
+	__int64 t5[10];
+	timeDeque(t5, N);
 
-        cout << "+-----------------------+--------------------+-------------------+--------------+--------------+---------------+" << endl;
-        cout << "|   Название операции   | Односвязный список | Класс 'Множество' |     List     |      Set     |     Deque     |" << endl;
-        cout << "+-----------------------+--------------------+-------------------+--------------+--------------+---------------+" << endl;
-        for (int i = 0; i < 10; i++) {
-            cout << "| " << title[i];
-            cout.setf(ios::left);
-            cout.width(10);
-            cout << "|  ";
-            cout.setf(ios::left);
-            cout.width(10);
-            cout << t1[i];
-            cout.setf(ios::left);
-            cout.width(10);
-            cout << " |  ";
-            cout.setf(ios::left);
-            cout.width(10);
-            cout << t2[i];
-            cout.setf(ios::left);
-            cout.width(5);
-            cout << " |  ";
-            cout.setf(ios::left);
-            cout.width(10);
-            cout << t3[i];
-            cout.setf(ios::left);
-            cout.width(5);
-            cout << " |  ";
-            cout.setf(ios::left);
-            cout.width(10);
-            cout << t4[i];
-            cout.setf(ios::left);
-            cout.width(5);
-            cout << " |  ";
-            cout.setf(ios::left);
-            cout.width(10);
-            cout << t5[i];
-            cout.setf(ios::left);
-            cout.width(10);
-            cout << "  |  " << endl;
+	string title[10] = { "Создание множества    ","Мощность множества    ","Подмножество АА       ","Подмножество АВ       ",
+		"Равенство А=А         ","Равенство А=В         ","Объединение           ","Пересечение           ",
+		"Разность              ", "Симметричная разность " };
 
-        }
-        cout << "+-----------------------+--------------------+-------------------+--------------+--------------+---------------+";
-    }
-    return 0;
+	cout << "+-----------------------+--------------------+-------------------+--------------+--------------+---------------+" << endl;
+	cout << "|   Название операции   | Односвязный список | Класс 'Множество' |     List     |      Set     |     Deque     |" << endl;
+	cout << "+-----------------------+--------------------+-------------------+--------------+--------------+---------------+" << endl;
+	for (int i = 0; i < 10; i++) {
+		cout << "| " << title[i];
+		cout.setf(ios::left);
+		cout.width(10);
+		cout << "|  ";
+		cout.setf(ios::left);
+		cout.width(10);
+		cout << t1[i];
+		cout.setf(ios::left);
+		cout.width(10);
+		cout << " |  ";
+		cout.setf(ios::left);
+		cout.width(10);
+		cout << t2[i];
+		cout.setf(ios::left);
+		cout.width(5);
+		cout << " |  ";
+		cout.setf(ios::left);
+		cout.width(10);
+		cout << t3[i];
+		cout.setf(ios::left);
+		cout.width(5);
+		cout << " |  ";
+		cout.setf(ios::left);
+		cout.width(10);
+		cout << t4[i];
+		cout.setf(ios::left);
+		cout.width(5);
+		cout << " |  ";
+		cout.setf(ios::left);
+		cout.width(10);
+		cout << t5[i];
+		cout.setf(ios::left);
+		cout.width(10);
+		cout << "  |  " << endl;
+
+	}
+	cout << "+-----------------------+--------------------+-------------------+--------------+--------------+---------------+";
+	return 0;
 }
